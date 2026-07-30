@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySync - Project Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #2563eb;
+            margin-top: 40px;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: #1e40af;
+            margin-top: 25px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            background: #f3f4f6;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            color: #d946ef;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .mermaid {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+
+        blockquote {
+            border-left: 4px solid #2563eb;
+            padding-left: 15px;
+            color: #4b5563;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            h2 {
+                page-break-before: always;
+                margin-top: 0;
+                padding-top: 20px;
+            }
+
+            h2:first-of-type {
+                page-break-before: auto;
+            }
+
+            pre,
+            .mermaid {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>StudySync - Comprehensive Learning Management System</h1>
+
+    <h2>1. Project Aim</h2>
+    <p><strong>StudySync</strong> aims to democratize access to quality education tools by providing a unified, gamified
+        platform where students can practice quizzes, access curated study materials, resolve doubts through community
+        forums, and track their academic growth in real-time. The goal is to make learning interactive, competitive, and
+        data-driven.</p>
+
+    <h2>2. Project Summary</h2>
+    <p>StudySync is a full-stack web application tailored for high school students (specifically CBSE/ICSE boards). It
+        bridges the gap between learning and assessment.</p>
+    <ul>
+        <li><strong>For Students</strong>: It offers a seamless interface to take timed quizzes, view detailed analytics
+            of their performance, compete on global leaderboards, and access study resources.</li>
+        <li><strong>For Admins/Faculty</strong>: It provides a powerful dashboard to manage content, create quizzes,
+            monitor student performance, and upload study materials.</li>
+    </ul>
+    <p>The system is built with scalability and user experience in mind, utilizing modern web technologies to ensure
+        fast load times and responsive design.</p>
+
+    <h2>3. System Architecture</h2>
+    <p>The project follows a <strong>Monolithic Client-Server Architecture</strong> (can be easily decoupled into
+        Microservices).</p>
+
+    <h3>High-Level Architecture Diagram</h3>
+    <div class="mermaid">
+        graph TD
+        Client["Client (React + Vite)"]
+        LB["Load Balancer / API Gateway"]
+        Server["Backend Server (Node.js + Express)"]
+        DB[("MongoDB Atlas")]
+        Auth["Auth Service (JWT)"]
+
+        Client -- HTTP/REST --> Server
+        Server -- Mongoose --> DB
+        Server -- Authenticates --> Auth
+
+        subgraph Frontend
+        Client
+        end
+
+        subgraph Backend
+        Server
+        Auth
+        end
+
+        subgraph Database
+        DB
+        end
+    </div>
+
+    <h3>Data Flow</h3>
+    <ol>
+        <li><strong>User Interaction</strong>: User interacts with the React Frontend (Shadcn UI).</li>
+        <li><strong>API Request</strong>: Frontend sends secure HTTP requests (Axios) to the Node.js Backend.</li>
+        <li><strong>Authentication</strong>: Requests are intercepted by <code>auth.middleware</code> to verify JWT
+            tokens.</li>
+        <li><strong>Business Logic</strong>: Controllers (e.g., <code>quiz.controller</code>) process the request.</li>
+        <li><strong>Data Persistence</strong>: Mongoose ODM interacts with MongoDB Atlas to fetch/save data.</li>
+        <li><strong>Response</strong>: JSON data is sent back to the frontend for rendering.</li>
+    </ol>
+
+    <h2>4. Technology Stack</h2>
+
+    <h3>Frontend</h3>
+    <ul>
+        <li><strong>Framework</strong>: React.js (Vite) - For fast, client-side rendering.</li>
+        <li><strong>Language</strong>: TypeScript - For type safety and maintainability.</li>
+        <li><strong>Styling</strong>: Tailwind CSS - For utility-first, responsive design.</li>
+        <li><strong>UI Library</strong>: Shadcn UI - For accessible, high-quality components.</li>
+        <li><strong>State Management</strong>: React Query (TanStack Query) - For server state management.</li>
+        <li><strong>Visualization</strong>: Recharts - For analytics charts.</li>
+    </ul>
+
+    <h3>Backend</h3>
+    <ul>
+        <li><strong>Runtime</strong>: Node.js - For non-blocking, event-driven execution.</li>
+        <li><strong>Framework</strong>: Express.js - For robust API routing and middleware.</li>
+        <li><strong>Language</strong>: TypeScript - For consistent typing across the stack.</li>
+        <li><strong>Database</strong>: MongoDB (Atlas) - NoSQL database for flexible schema design (JSON-like
+            documents).</li>
+        <li><strong>ODM</strong>: Mongoose - For schema validation and data modeling.</li>
+        <li><strong>Authentication</strong>: JSON Web Tokens (JWT) & Bcrypt - For stateless, secure auth.</li>
+    </ul>
+
+    <h3>Cloud & DevOps</h3>
+    <ul>
+        <li><strong>Database</strong>: MongoDB Atlas - Fully managed, auto-scaling cloud database.</li>
+        <li><strong>Media Storage</strong>: Cloudinary - Cloud-based management for user uploads (images/PDFs).</li>
+        <li><strong>Version Control</strong>: Git & GitHub - For collaborative development and version tracking.</li>
+        <li><strong>Deployment (Recommended)</strong>: Vercel (Frontend) & Render (Backend) for CI/CD pipelines.</li>
+    </ul>
+
+    <h2>5. Security Implementation</h2>
+    <p>Security is a core priority in StudySync. The application implements multiple layers of protection:</p>
+    <ol>
+        <li><strong>Authentication & Authorization</strong>:
+            <ul>
+                <li><strong>JWT (JSON Web Tokens)</strong>: Used for stateless, secure user sessions. Tokens are signed
+                    with a secret key and contain user roles.</li>
+                <li><strong>Bcrypt</strong>: User passwords are never stored in plain text. They are hashed using
+                    <code>bcryptjs</code> with a salt round of 10 before saving to the database.</li>
+                <li><strong>RBAC (Role-Based Access Control)</strong>: Middleware (<code>authorize('admin')</code>)
+                    ensures that critical actions like creating quizzes or deleting content are restricted to Admin
+                    users.</li>
+            </ul>
+        </li>
+        <li><strong>Data Protection</strong>:
+            <ul>
+                <li><strong>Input Validation</strong>: Mongoose schemas enforce strict data types and required fields,
+                    preventing bad data injection.</li>
+                <li><strong>CORS Policy</strong>: Configured to only allow requests from the trusted frontend origin.
+                </li>
+                <li><strong>Environment Variables</strong>: Sensitive credentials (DB URI, JWT Secret) are stored in
+                    <code>.env</code> files and never committed to version control.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>6. Database Design</h2>
+
+    <h3>Database Schema (ER Diagram)</h3>
+    <p>The application uses a relational-like structure within MongoDB to maintain data integrity.</p>
+
+    <div class="mermaid">
+        erDiagram
+        USER ||--o{ QUIZ_ATTEMPT : makes
+        USER ||--o{ QUESTION : posts
+        USER ||--o{ ANSWER : writes
+        USER {
+        ObjectId _id
+        string name
+        string email
+        string password_hash
+        string role
+        number xp
+        string badges
+        }
+
+        QUIZ ||--o{ QUIZ_ATTEMPT : has
+        QUIZ {
+        ObjectId _id
+        string title
+        string subject
+        string grade
+        json questions
+        int duration
+        ObjectId createdBy
+        }
+
+        QUIZ_ATTEMPT {
+        ObjectId _id
+        ObjectId student_id
+        ObjectId quiz_id
+        int score
+        json answers
+        datetime completedAt
+        }
+
+        STUDY_MATERIAL {
+        ObjectId _id
+        string title
+        string subject
+        string type
+        string url
+        }
+
+        QUESTION ||--o{ ANSWER : has
+        QUESTION {
+        ObjectId _id
+        string title
+        string body
+        ObjectId askedBy
+        datetime createdAt
+        }
+    </div>
+
+    <h3>Collection Structure</h3>
+    <ul>
+        <li><strong>Users</strong>: Stores user profiles, authentication credentials, and gamification stats (XP,
+            Badges).</li>
+        <li><strong>Quizzes</strong>: Contains quiz metadata (Title, Subject, Time Limit) and the array of Question
+            objects.</li>
+        <li><strong>QuizAttempts</strong>: Links a <code>User</code> to a <code>Quiz</code>, recording the score,
+            answers chosen, and timestamp. This is crucial for analytics.</li>
+        <li><strong>StudyMaterials</strong>: Stores references to educational content (PDFs, Video Links) categorized by
+            subject and grade.</li>
+        <li><strong>Questions/Forum</strong>: Stores community discussions. Each question document embeds or references
+            answers.</li>
+    </ul>
+
+    <h2>7. System Use Cases</h2>
+
+    <h3>Use Case Diagram</h3>
+    <p>The following diagram illustrates the primary interactions for Students and Admins.</p>
+
+    <div class="mermaid">
+        usecaseDiagram
+        actor Student
+        actor Admin
+
+        Student --> (Sign Up / Login)
+        Student --> (View Dashboard)
+        Student --> (Take Quiz)
+        Student --> (View Leaderboard)
+        Student --> (Ask Doubt - Forum)
+        Student --> (View Study Materials)
+
+        Admin --> (Sign Up / Login)
+        Admin --> (View Dashboard)
+        Admin --> (Manage Quizzes)
+        Admin --> (Upload Materials)
+        Admin --> (View Results)
+        Admin --> (Ask Doubt - Forum)
+    </div>
+
+    <h2>8. Key Features</h2>
+
+    <h3>🎓 Student Features</h3>
+    <ol>
+        <li><strong>Interactive Quizzes</strong>: Timed quizzes with instant feedback and detailed solutions.</li>
+        <li><strong>Performance Analytics</strong>: Visual graphs showing subject-wise accuracy, improvement trends, and
+            global rank.</li>
+        <li><strong>Gamification</strong>: XP (Experience Points) system, badges, and a real-time Leaderboard.</li>
+        <li><strong>Discussion Forum</strong>: StackOverflow-style Q&A platform for peer learning.</li>
+        <li><strong>Profile Management</strong>: Customizable profiles with academic details.</li>
+    </ol>
+
+    <h3>🛡️ Admin Features</h3>
+    <ol>
+        <li><strong>Quiz Management</strong>: Create, Edit, Delete, and List quizzes via a dedicated dashboard.</li>
+        <li><strong>Result Monitoring</strong>: View and export (CSV) student performance data.</li>
+        <li><strong>Content Management</strong>: Upload and organize study materials (PDFs, Videos).</li>
+    </ol>
+
+    <h2>9. Code Structure & Highlights</h2>
+
+    <h3>A. Secure Authentication Middleware</h3>
+    <p>Ensures only authorized users access protected routes.</p>
+    <pre><code>// backend/src/middleware/auth.middleware.ts
+export const protect = async (req: AuthRequest, res: Response, next: NextFunction) => {
+    let token;
+    if (req.headers.authorization?.startsWith('Bearer')) {
+        try {
+            token = req.headers.authorization.split(' ')[1];
+            const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+            req.user = await User.findById((decoded as any).id).select('-password');
+            next();
+        } catch (error) {
+            res.status(401).json({ message: 'Not authorized, token failed' });
+        }
+    }
+    if (!token) {
+        res.status(401).json({ message: 'Not authorized, no token' });
+    }
+};</code></pre>
+
+    <h3>B. Dynamic Quiz Attempt Logic</h3>
+    <p>Handles scoring, XP calculation, and prevents cheating (max attempts).</p>
+    <pre><code>// backend/src/modules/quiz/quiz.controller.ts
+export const attemptQuiz = async (req: AuthRequest, res: Response) => {
+    // ... validation ...
+    let score = 0;
+    const processedAnswers = answers.map((ans: any) => {
+        const question = quiz.questions[ans.questionIndex];
+        const isCorrect = question.correctOption === ans.selectedOption;
+        if (isCorrect) score++;
+        return { ... };
+    });
+
+    const xpGained = score * 10;
+    // Update User XP atomically
+    await User.findByIdAndUpdate(req.user._id, { $inc: { xp: xpGained } });
+    // ... save attempt ...
+};</code></pre>
+
+    <h3>C. Robust Analytics Aggregation</h3>
+    <p>Calculates complex metrics like subject-wise accuracy on the fly.</p>
+    <pre><code>// backend/src/modules/analytics/analytics.controller.ts
+attempts.forEach((attempt: any) => {
+    if (!attempt.quiz) return; // Handle deleted quizzes
+    const subject = attempt.quiz.subject;
+    if (!subjectPerformance[subject]) {
+        subjectPerformance[subject] = { score: 0, total: 0 };
+    }
+    subjectPerformance[subject].score += attempt.score;
+    subjectPerformance[subject].total += attempt.totalQuestions;
+});</code></pre>
+
+    <h2>10. Top Strengths (Why this project is good)</h2>
+    <ol>
+        <li><strong>Scalable Architecture</strong>: The separation of concerns (Controller-Service-Model) and use of
+            TypeScript makes the codebase easy to scale and maintain.</li>
+        <li><strong>User-Centric Design</strong>: The UI is modern, responsive, and accessible (Dark mode,
+            Glassmorphism), providing a superior UX compared to traditional LMS.</li>
+        <li><strong>Data Integrity & Security</strong>: Implements strict validation (Mongoose schemas), secure password
+            hashing (Bcrypt), and protected API endpoints to prevent unauthorized access.</li>
+    </ol>
+
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+
+</html>

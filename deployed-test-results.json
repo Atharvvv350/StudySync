@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-02-02T13:19:53.867Z",
+  "url": "https://mystudysync.vercel.app",
+  "summary": {
+    "totalEndpoints": 4,
+    "successful": 4,
+    "protected": 0,
+    "failed": 0,
+    "avgResponseTimeMs": 150.5,
+    "minResponseTimeMs": 45,
+    "maxResponseTimeMs": 456
+  },
+  "details": [
+    {
+      "endpoint": "Get Study Materials",
+      "path": "/api/study-materials",
+      "status": 200,
+      "responseTimeMs": 456,
+      "dataSize": 679,
+      "timestamp": "2026-02-02T13:19:53.711Z"
+    },
+    {
+      "endpoint": "Get Forum Questions",
+      "path": "/api/forum",
+      "status": 200,
+      "responseTimeMs": 56,
+      "dataSize": 679,
+      "timestamp": "2026-02-02T13:19:53.773Z"
+    },
+    {
+      "endpoint": "Get Leaderboard",
+      "path": "/api/leaderboard",
+      "status": 200,
+      "responseTimeMs": 45,
+      "dataSize": 679,
+      "timestamp": "2026-02-02T13:19:53.819Z"
+    },
+    {
+      "endpoint": "Get Quizzes",
+      "path": "/api/quiz",
+      "status": 200,
+      "responseTimeMs": 45,
+      "dataSize": 679,
+      "timestamp": "2026-02-02T13:19:53.865Z"
+    }
+  ]
+}

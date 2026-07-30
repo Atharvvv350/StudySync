@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-02-02T13:20:15.685Z",
+  "testConfiguration": {
+    "concurrentUsers": 50,
+    "requestsPerUser": 5,
+    "totalRequests": 250,
+    "url": "https://mystudysync.vercel.app",
+    "endpoint": "/api/study-materials"
+  },
+  "results": {
+    "totalTimeMs": 10222,
+    "successfulRequests": 250,
+    "failedRequests": 0,
+    "successRate": "100.00%",
+    "throughput": "24.46 requests/sec"
+  },
+  "responseTimeAnalysis": {
+    "minMs": 40,
+    "maxMs": 184,
+    "avgMs": "49.32",
+    "p95Ms": 63,
+    "p99Ms": 143
+  },
+  "topErrors": []
+}

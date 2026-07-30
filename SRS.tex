@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\geometry{a4paper, margin=1in}
+
+\title{\textbf{StudySync} \\ \vspace{0.5em} \Large{Software Requirements Specification (SRS)} \\ \vspace{1em} \textbf{Group 14}}
+\author{Sahil Narang \\ Anshul Paliwal \\ Mahi Goyel \\ Atharv Deoaskar \\ Prayansh Lakhvani}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\subsection{Purpose}
+The purpose of this document is to define the software requirements for \textbf{StudySync}, a comprehensive educational platform designed to enhance student learning through study materials, adaptive quizzes, discussion forums, and gamification.
+
+\subsection{Scope}
+StudySync is a web-based application that connects students and teachers. It allows teachers to upload study materials and create quizzes, while students can access these resources, take quizzes, ask questions in the forum, and track their progress through analytics and leaderboards.
+
+\section{Overall Description}
+\subsection{User Classes and Characteristics}
+\begin{itemize}
+    \item \textbf{Student}: Accesses study materials, takes quizzes, participates in forums, and views personal analytics.
+    \item \textbf{Teacher}: Uploads study materials, creates quizzes, answers forum questions, and verifies answers.
+    \item \textbf{Admin}: Manages users and content (extends Teacher capabilities).
+\end{itemize}
+
+\subsection{Operating Environment}
+\begin{itemize}
+    \item \textbf{Frontend}: React.js (Vite), Tailwind CSS, Shadcn UI.
+    \item \textbf{Backend}: Node.js, Express.js, TypeScript.
+    \item \textbf{Database}: MongoDB (Atlas).
+    \item \textbf{Hosting}: Cloud-based (e.g., Vercel/Netlify for Frontend, Render/Heroku for Backend).
+\end{itemize}
+
+\section{System Features (Functional Requirements)}
+
+\subsection{Authentication \& Authorization}
+\begin{itemize}
+    \item Users can register and login using Email/Password.
+    \item Role-based access control (Student, Teacher, Admin).
+    \item Secure password hashing using bcrypt.
+    \item JWT-based session management.
+\end{itemize}
+
+\subsection{Profile Management}
+\begin{itemize}
+    \item Users can view and edit their profile (Name, Grade, Board).
+    \item Gamification elements: XP (Experience Points), Badges, and Ranks.
+    \item Profile stats: Streak, Quizzes Taken, Global Rank.
+\end{itemize}
+
+\subsection{Study Material Repository}
+\begin{itemize}
+    \item Teachers can upload PDF study materials with metadata (Title, Subject, Topic).
+    \item Students can browse, search, and filter materials by Subject/Topic.
+    \item Integration with Cloudinary for file storage.
+\end{itemize}
+
+\subsection{Adaptive Quizzes}
+\begin{itemize}
+    \item Teachers can create quizzes with multiple-choice questions.
+    \item Students can attempt quizzes.
+    \item Automatic scoring and XP awards for correct answers.
+    \item Difficulty levels: Easy, Medium, Hard.
+\end{itemize}
+
+\subsection{Discussion Forum}
+\begin{itemize}
+    \item Students can post questions with tags.
+    \item Users can answer questions.
+    \item Upvote system for helpful answers.
+    \item Teachers can mark answers as "Verified".
+\end{itemize}
+
+\subsection{Analytics \& Leaderboard}
+\begin{itemize}
+    \item Personal dashboard showing subject-wise performance accuracy.
+    \item Global leaderboard ranking students by total XP.
+    \item Activity tracking (Recent quizzes, badges earned).
+\end{itemize}
+
+\subsection{AI Doubt Solving (Planned)}
+\begin{itemize}
+    \item Integration with AI models to provide instant answers to student queries.
+\end{itemize}
+
+\section{Non-Functional Requirements}
+\subsection{Performance}
+\begin{itemize}
+    \item The system shall respond to API requests within 200ms on average.
+    \item Support for concurrent users accessing quizzes.
+\end{itemize}
+
+\subsection{Security}
+\begin{itemize}
+    \item \textbf{Authentication}: JSON Web Tokens (JWT) for stateless authentication.
+    \item \textbf{Password Security}: Passwords hashed using \texttt{bcryptjs} with salt rounds.
+    \item \textbf{Data Protection}: All data transmitted over HTTPS.
+    \item \textbf{Input Validation}: Strict validation using \texttt{Zod} schemas to prevent injection attacks.
+    \item \textbf{Headers}: Implementation of \texttt{Helmet} middleware for secure HTTP headers.
+    \item \textbf{CORS}: Configured to allow only trusted frontend origins.
+\end{itemize}
+
+\subsection{Reliability}
+\begin{itemize}
+    \item 99.9\% uptime target.
+    \item Automated backups of the database.
+\end{itemize}
+
+\section{System Architecture}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{architecture.png}
+    \caption{StudySync System Architecture Diagram}
+    \label{fig:architecture}
+\end{figure}
+
+\section{External Interface Requirements}
+\subsection{User Interfaces}
+\begin{itemize}
+    \item Responsive web design for Desktop, Tablet, and Mobile.
+    \item Modern, clean UI using Shadcn components and Tailwind CSS.
+\end{itemize}
+
+\subsection{Software Interfaces}
+\begin{itemize}
+    \item \textbf{MongoDB Atlas}: For database management.
+    \item \textbf{Cloudinary API}: For media/file management.
+\end{itemize}
+
+\subsection{API Interfaces}
+The system exposes a RESTful API with the following main endpoints:
+\begin{itemize}
+    \item \texttt{POST /api/auth/*}: Authentication (Login, Register).
+    \item \texttt{GET/PUT /api/profile}: User profile management.
+    \item \texttt{GET/POST /api/quiz/*}: Quiz creation and attempts.
+    \item \texttt{GET/POST /api/study-material/*}: Material management.
+    \item \texttt{GET/POST /api/forum/*}: Discussion forum interactions.
+    \item \texttt{GET /api/analytics}: User performance data.
+\end{itemize}
+
+\end{document}

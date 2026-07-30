@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "69268955d082be3fb5261c16",
+    "name": "Sahil Narang",
+    "email": "snarang445566@gmail.com",
+    "password": "$2b$10$fcR8FIfaJIewrv8PqZfuA.uz5Iz0DdQxfngCkp7S21K65ThnIYWga",
+    "role": "student",
+    "subjects": [],
+    "xp": 0,
+    "badges": [],
+    "createdAt": "2025-11-26T05:00:05.366Z",
+    "updatedAt": "2025-11-26T05:00:05.366Z",
+    "__v": 0
+  },
+  {
+    "_id": "69268bfe4f8e6cece4a31944",
+    "name": "Sahil Narang",
+    "email": "sahil141530@gmail.com",
+    "password": "$2b$10$yFwt6o77cbR8Q1mZ08Hs1ufxV.P81d/ML3.wG.mRpr.MKUTd6NVrG",
+    "role": "admin",
+    "subjects": [],
+    "xp": 130,
+    "badges": [],
+    "createdAt": "2025-11-26T05:11:26.598Z",
+    "updatedAt": "2025-11-28T04:24:19.864Z",
+    "__v": 0,
+    "board": "CBSE",
+    "grade": "10 - 87"
+  },
+  {
+    "_id": "6929227735daf4f9504f08bb",
+    "name": "Vansh Kapoor",
+    "email": "vansh@gmail.com",
+    "password": "$2b$10$/ccJae4DwzVoR0amS5TnO.bHICGKyGA7aT.zifzUuDvSZeeMRHmNm",
+    "role": "student",
+    "subjects": [],
+    "xp": 10,
+    "badges": [],
+    "createdAt": "2025-11-28T04:17:59.134Z",
+    "updatedAt": "2025-11-28T04:18:29.075Z",
+    "__v": 0
+  }
+]
